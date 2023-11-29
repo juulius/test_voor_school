@@ -17,10 +17,10 @@ class test
 
 }
 
-function SELECT ($info, $colom)
+function SELECT ($info, $colom, $conn)
 {
 
-    $SQL = 'SELECT ';
+    $SQL = 'SELECT *';
     $text = '';
     foreach ($info as $key => $value)
     {
@@ -29,10 +29,17 @@ function SELECT ($info, $colom)
     $text = rtrim($text, ',');
 
     $SQL = $SQL . $text. ' FROM '. $colom;
+    $query = $conn->query($SQL);
+    $gelukt = $query->execute();
 
-
-    
-
+    if ($gelukt)
+        while ($result=$query->fetch(PDO::FETCH_ASSOC)) // checken of alles binnen is
+        {
+            $info[] = $result; //push result
+        }
+        $info["ID"] = $conn->lastInsertId();
+    else
+        $info = "fault during SELECT statement";
 
     return $info;
 }
