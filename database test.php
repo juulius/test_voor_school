@@ -1,6 +1,9 @@
 <?php
 
-
+/*commentaar
+dit is een stukje voor de database afhandeling
+password zou denk ik SHA encript moeten worden om te kijken of dat werkt
+*/
 
 $servername = 'localhost';
 $database = 'website';
